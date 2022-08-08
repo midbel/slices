@@ -23,3 +23,10 @@ func Lst[T any](args []T) T {
 func Rest[T any](args []T) []T {
 	return args[1:]
 }
+
+func Take[T any](args []T, n int) []T {
+	if n >= len(args) {
+		return nil
+	}
+	return args[n:]
+}
