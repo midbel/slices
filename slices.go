@@ -32,6 +32,13 @@ func Lst[T any](args []T) T {
 	return args[len(args)-1]
 }
 
+func Slice[T any](args []T) []T {
+	if len(args) == 0 {
+		return args
+	}
+	return args[:len(args)-1]
+}
+
 func Rest[T any](args []T) []T {
 	if len(args) == 0 {
 		return nil
@@ -55,4 +62,22 @@ func Filter[T any](args []T, fn func(T) bool) []T {
 		list = append(list, args[i])
 	}
 	return list
+}
+
+func Every[T any](args []T, fn func(T) bool) bool {
+	for i := range args {
+		if !fn(args[i]) {
+			return false
+		}
+	}
+	return true
+}
+
+func Some[T any](args []T, fn func(T) bool) bool {
+	for i := range args {
+		if fn(args[i]) {
+			return true
+		}
+	}
+	return false
 }
