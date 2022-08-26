@@ -81,3 +81,12 @@ func Some[T any](args []T, fn func(T) bool) bool {
 	}
 	return false
 }
+
+func Reverse[T any](args []T) []T {
+	list := make([]T, len(args))
+	for i, j := 0, len(args)-1; i < len(args); i++ {
+		list[j] = args[i]
+		j--
+	}
+	return list
+}
