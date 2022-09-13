@@ -90,3 +90,8 @@ func Reverse[T any](args []T) []T {
 	}
 	return list
 }
+
+func Prepend[T any](fst T, rest []T) []T {
+	arr := []T{fst}
+	return append(arr, rest...)
+}
