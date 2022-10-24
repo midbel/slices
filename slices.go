@@ -57,6 +57,15 @@ func Take[T any](args []T, n int) []T {
 	return args[n:]
 }
 
+func Index[T any](args []T, fn func(T) bool) int {
+	for i := range args {
+		if fn(args[i]) {
+			return i
+		}
+	}
+	return -1
+}
+
 func Filter[T any](args []T, fn func(T) bool) []T {
 	list := make([]T, 0, len(args))
 	for i := range args {
