@@ -4,6 +4,8 @@ import (
 	"math/rand"
 )
 
+// At returns the element at the index of the given slice. At returns the zero
+// value of the slice type if index is out of range
 func At[T any](args []T, ix int) T {
 	var x T
 	if ix < 0 || ix >= len(args) {
@@ -12,6 +14,8 @@ func At[T any](args []T, ix int) T {
 	return args[ix]
 }
 
+// Fst returns the first element of the given slice. It returns the zero value
+// of the slice type if the slice is empty
 func Fst[T any](args []T) T {
 	if len(args) == 0 {
 		var x T
@@ -20,6 +24,8 @@ func Fst[T any](args []T) T {
 	return args[0]
 }
 
+// Snd returns the second element of the given slice. It returns the zero value
+// of the slice type if the length of the given slice is less than two elements
 func Snd[T any](args []T) T {
 	if len(args) < 2 {
 		var x T
@@ -28,6 +34,8 @@ func Snd[T any](args []T) T {
 	return args[1]
 }
 
+// Lst returns the last element of the given slice. It returns the zero value of
+// the slice type if the given slice is empty
 func Lst[T any](args []T) T {
 	if len(args) == 0 {
 		var x T
@@ -36,6 +44,7 @@ func Lst[T any](args []T) T {
 	return args[len(args)-1]
 }
 
+// Slice returns the given slice with the last element removed from it
 func Slice[T any](args []T) []T {
 	if len(args) == 0 {
 		return args
@@ -43,20 +52,22 @@ func Slice[T any](args []T) []T {
 	return args[:len(args)-1]
 }
 
+// Rest returns the given slice with the first element removed from it
 func Rest[T any](args []T) []T {
-	if len(args) == 0 {
-		return nil
-	}
-	return args[1:]
+	return Take(args, 1)
 }
 
+// Take returns the given slice with the n first element removed from it. If 
+// n is greater than the size of the given slice, an empty slice is returned
 func Take[T any](args []T, n int) []T {
-	if n >= len(args) {
+	if n < 0 || n >= len(args) {
 		return nil
 	}
 	return args[n:]
 }
 
+// Index returns the index of the first element for which the given function 
+// returns true
 func Index[T any](args []T, fn func(T) bool) int {
 	for i := range args {
 		if fn(args[i]) {
@@ -66,6 +77,8 @@ func Index[T any](args []T, fn func(T) bool) int {
 	return -1
 }
 
+// Filter returns a new slice with all elements from the input slice for which 
+// the given function returns true
 func Filter[T any](args []T, fn func(T) bool) []T {
 	list := make([]T, 0, len(args))
 	for i := range args {
@@ -77,6 +90,9 @@ func Filter[T any](args []T, fn func(T) bool) []T {
 	return list
 }
 
+// Every returns true if all the elements of the input slice pass the test
+// of the given function. Every stops iterating as soon as one of the element
+// given to the function fails
 func Every[T any](args []T, fn func(T) bool) bool {
 	for i := range args {
 		if !fn(args[i]) {
@@ -86,6 +102,9 @@ func Every[T any](args []T, fn func(T) bool) bool {
 	return true
 }
 
+// Some returns true if at least one element of the input slice pass the test
+// of the given function. Every stops iterating as soon as one of the element
+// given to the function succeed
 func Some[T any](args []T, fn func(T) bool) bool {
 	for i := range args {
 		if fn(args[i]) {
@@ -95,6 +114,8 @@ func Some[T any](args []T, fn func(T) bool) bool {
 	return false
 }
 
+// Reverse returns a new slice with all the elements of the input slice in 
+// reverse order
 func Reverse[T any](args []T) []T {
 	list := make([]T, len(args))
 	for i, j := 0, len(args)-1; i < len(args); i++ {
@@ -104,6 +125,7 @@ func Reverse[T any](args []T) []T {
 	return list
 }
 
+// Shuffle randomizes the elements of the slice in place
 func Shuffle[T any](args []T) []T {
 	rand.Shuffle(len(args), func(i, j int) {
 		args[i], args[j] = args[j], args[i]
@@ -111,18 +133,24 @@ func Shuffle[T any](args []T) []T {
 	return args
 }
 
+// Foreach gives each elements of the given slices to a function
 func Foreach[T any](args []T, do func(T)) {
 	for i := range args {
 		do(args[i])
 	}
 }
 
+// Apply call the given function to each element of the slice and set the 
+// returned value at the index of the input element
 func Apply[T any](args []T, do func(T) T) {
 	for i := range args {
 		args[i] = do(args[i])
 	}
 }
 
+// Map call the given function to each element of the slice and set the 
+// returned value at the index of the input element in a copy of the input
+// slice
 func Map[T any](args []T, do func(T) T) []T {
 	vs := make([]T, len(args))
 	copy(vs, args)
@@ -130,6 +158,7 @@ func Map[T any](args []T, do func(T) T) []T {
 	return vs
 }
 
+// Prepend appends an element at the beginning of the input slice
 func Prepend[T any](fst T, rest []T) []T {
 	arr := []T{fst}
 	return append(arr, rest...)
