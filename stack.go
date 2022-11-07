@@ -23,6 +23,10 @@ func (s *Stack[T]) Pop() T {
 	return t
 }
 
+func (s *Stack[T]) Top() T {
+	return Lst(s.list)
+}
+
 func (s *Stack[T]) Len() int {
 	return len(s.list)
 }

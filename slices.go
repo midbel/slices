@@ -57,7 +57,7 @@ func Rest[T any](args []T) []T {
 	return Take(args, 1)
 }
 
-// Take returns the given slice with the n first element removed from it. If 
+// Take returns the given slice with the n first element removed from it. If
 // n is greater than the size of the given slice, an empty slice is returned
 func Take[T any](args []T, n int) []T {
 	if n < 0 || n >= len(args) {
@@ -66,7 +66,7 @@ func Take[T any](args []T, n int) []T {
 	return args[n:]
 }
 
-// Index returns the index of the first element for which the given function 
+// Index returns the index of the first element for which the given function
 // returns true
 func Index[T any](args []T, fn func(T) bool) int {
 	for i := range args {
@@ -77,7 +77,7 @@ func Index[T any](args []T, fn func(T) bool) int {
 	return -1
 }
 
-// Filter returns a new slice with all elements from the input slice for which 
+// Filter returns a new slice with all elements from the input slice for which
 // the given function returns true
 func Filter[T any](args []T, fn func(T) bool) []T {
 	list := make([]T, 0, len(args))
@@ -114,7 +114,7 @@ func Some[T any](args []T, fn func(T) bool) bool {
 	return false
 }
 
-// Reverse returns a new slice with all the elements of the input slice in 
+// Reverse returns a new slice with all the elements of the input slice in
 // reverse order
 func Reverse[T any](args []T) []T {
 	list := make([]T, len(args))
@@ -140,7 +140,7 @@ func Foreach[T any](args []T, do func(T)) {
 	}
 }
 
-// Apply call the given function to each element of the slice and set the 
+// Apply call the given function to each element of the slice and set the
 // returned value at the index of the input element
 func Apply[T any](args []T, do func(T) T) {
 	for i := range args {
@@ -148,7 +148,7 @@ func Apply[T any](args []T, do func(T) T) {
 	}
 }
 
-// Map call the given function to each element of the slice and set the 
+// Map call the given function to each element of the slice and set the
 // returned value at the index of the input element in a copy of the input
 // slice
 func Map[T any](args []T, do func(T) T) []T {
