@@ -163,3 +163,31 @@ func Prepend[T any](fst T, rest []T) []T {
 	arr := []T{fst}
 	return append(arr, rest...)
 }
+
+func ShiftLeft[T any](list []T) {
+	if len(list) <= 1 {
+		return
+	}
+	var (
+		lst = Lst(list)
+		fst = Fst(list)
+	)
+	for i := len(list) - 1; i > 0; i-- {
+		list[i-1], lst = lst, list[i-1]
+	}
+	list[len(list)-1] = fst
+}
+
+func ShiftRight[T any](list []T) {
+	if len(list) <= 1 {
+		return
+	}
+	var (
+		lst = Lst(list)
+		fst = Fst(list)
+	)
+	for i := 0; i < len(list)-1; i++ {
+		list[i+1], fst = fst, list[i+1]
+	}
+	list[0] = lst
+}

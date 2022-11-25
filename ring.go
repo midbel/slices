@@ -8,7 +8,7 @@ type Ring[T any] struct {
 
 func NewRing[T any](list []T) *Ring[T] {
 	var (
-		tmp = make([]T, len(list))
+		tmp  = make([]T, len(list))
 		size = copy(tmp, list)
 	)
 	return &Ring[T]{
