@@ -30,7 +30,7 @@ func TestShiftLeft(t *testing.T) {
 	for i, d := range data {
 		got := copyInput(d.Input)
 		ShiftLeft(got)
-		
+
 		str := strings.Join(got, ", ")
 		if str != strings.Join(d.Want, ", ") {
 			t.Errorf("% 2d: unexpected result! want %s, got %s", i+1, d.Want, got)
@@ -71,9 +71,8 @@ func TestShiftRight(t *testing.T) {
 	}
 }
 
-
 func copyInput(in []string) []string {
 	got := make([]string, len(in))
-	copy(got, in)	
+	copy(got, in)
 	return got
 }
