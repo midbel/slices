@@ -4,7 +4,7 @@ func Combine[T any](list ...[]T) [][]T {
 	if len(list) == 0 {
 		return nil
 	} else if len(list) == 1 {
-		return [][]T{list}
+		return [][]T{list[0]}
 	}
 	var ret [][]T
 	for _, v := range list[0] {
