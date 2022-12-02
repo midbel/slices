@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestShiftLeft(t *testing.T) {
+func TestRotateLeft(t *testing.T) {
 	data := []struct {
 		Input []string
 		Want  []string
@@ -29,7 +29,7 @@ func TestShiftLeft(t *testing.T) {
 	}
 	for i, d := range data {
 		got := copyInput(d.Input)
-		ShiftLeft(got)
+		RotateLeft(got)
 
 		str := strings.Join(got, ", ")
 		if str != strings.Join(d.Want, ", ") {
@@ -38,7 +38,7 @@ func TestShiftLeft(t *testing.T) {
 	}
 }
 
-func TestShiftRight(t *testing.T) {
+func TestRotateRight(t *testing.T) {
 	data := []struct {
 		Input []string
 		Want  []string
@@ -62,7 +62,7 @@ func TestShiftRight(t *testing.T) {
 	}
 	for i, d := range data {
 		got := copyInput(d.Input)
-		ShiftRight(got)
+		RotateRight(got)
 
 		str := strings.Join(got, ", ")
 		if str != strings.Join(d.Want, ", ") {

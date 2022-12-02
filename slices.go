@@ -164,7 +164,7 @@ func Prepend[T any](fst T, rest []T) []T {
 	return append(arr, rest...)
 }
 
-func ShiftLeft[T any](list []T) {
+func RotateLeft[T any](list []T) {
 	if len(list) <= 1 {
 		return
 	}
@@ -178,7 +178,7 @@ func ShiftLeft[T any](list []T) {
 	list[len(list)-1] = fst
 }
 
-func ShiftRight[T any](list []T) {
+func RotateRight[T any](list []T) {
 	if len(list) <= 1 {
 		return
 	}
