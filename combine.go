@@ -7,16 +7,20 @@ func Combine[T any](list ...[]T) [][]T {
 		return [][]T{list[0]}
 	}
 	var ret [][]T
-	for _, v := range list[0] {
-		ret = append(ret, []T{v})
+	for _, v := range Fst(list) {
+		ret = append(ret, combine([]T{v}, Rest(list))...)
 	}
-	for _, arr := range list[1:] {
-		tmp := make([][]T, len(ret)*len(arr))
-		for i := 0; i < len(tmp); i++ {
-			tmp[i] = append(tmp[i], ret[i%len(ret)]...)
-			tmp[i] = append(tmp[i], arr[i%len(arr)])
-		}
-		ret = tmp
+	return ret
+}
+
+func combine[T any](in []T, list [][]T) [][]T {
+	var ret [][]T
+	if len(list) == 0 {
+		return [][]T{in}
+	}
+	for _, v := range Fst(list) {
+		tmp := append(in, v)
+		ret = append(ret, combine(tmp, Rest(list))...)
 	}
 	return ret
 }
