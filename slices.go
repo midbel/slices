@@ -66,6 +66,21 @@ func Take[T any](args []T, n int) []T {
 	return args[n:]
 }
 
+func Splice[T any](args []T, i, n int, rest ...T) []T {
+	if i < 0 || i >= len(args) {
+		return nil
+	}
+	var list []T
+	list = append(list, args[:i]...)
+	if len(rest) > 0 {
+		list = append(list, rest...)
+	}
+	if i+n < len(args) {
+		list = append(list, args[i+n:]...)
+	}
+	return list
+}
+
 // Index returns the index of the first element for which the given function
 // returns true
 func Index[T any](args []T, fn func(T) bool) int {
