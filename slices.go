@@ -132,12 +132,11 @@ func Some[T any](args []T, fn func(T) bool) bool {
 // Reverse returns a new slice with all the elements of the input slice in
 // reverse order
 func Reverse[T any](args []T) []T {
-	list := make([]T, len(args))
 	for i, j := 0, len(args)-1; i < len(args); i++ {
-		list[j] = args[i]
+		args[j], args[i] = args[i], args[j]
 		j--
 	}
-	return list
+	return args
 }
 
 // Shuffle randomizes the elements of the slice in place
